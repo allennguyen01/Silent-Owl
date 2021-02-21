@@ -16,6 +16,8 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
     JLabel settingsIcon;
     JButton settings_on = new JButton();
     JButton settings_off = new JButton();
+    JLabel dBUpIcon;
+    JLabel dBDownIcon;
     JButton graph = new JButton();
     Color BACKGROUND_COLOR = new Color(0x282828);
     Color PINKY_RED_SALMON = new Color(0xFF7074);
@@ -190,6 +192,10 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
                     settings_on.setEnabled(false);
                     settings_off.setVisible(true);
                     settings_off.setEnabled(true);
+                    dBUpIcon.setVisible(true);
+                    dBUpIcon.setEnabled(true);
+                    dBDownIcon.setVisible(true);
+                    dBDownIcon.setEnabled(true);
                     //settings.removeActionListener(this);
                 }
             }
@@ -212,6 +218,10 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
                     settings_on.setEnabled(true);
                     settings_off.setVisible(false);
                     settings_off.setEnabled(false);
+                    dBUpIcon.setVisible(false);
+                    dBUpIcon.setEnabled(false);
+                    dBDownIcon.setVisible(false);
+                    dBDownIcon.setEnabled(false);
                     settings_open = false;
                 }
             }
@@ -247,10 +257,6 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         //Run button
         run.setBounds(527, 400, 211, 80); //TODO: set the bounds
         run.setFocusable(false);
-//        run.setBackground(BACKGROUND_COLOR);
-//        run.setFont(new Font("Barlow Condensed Light", Font.PLAIN, 60));
-//        run.setForeground(Color.WHITE);
-//        run.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
         run.setOpaque(false);
         run.setContentAreaFilled(false);
         run.setBorderPainted(false);
@@ -258,10 +264,6 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         //stop button
         stop.setBounds(527, 400, 211, 80); //TODO: set the bounds
         stop.setFocusable(false);
-//        stop.setBackground(PINKY_RED_SALMON);
-//        stop.setFont(new Font("Barlow Condensed Light", Font.PLAIN, 60));
-//        stop.setForeground(Color.BLACK);
-//        stop.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         stop.setOpaque(false);
         stop.setContentAreaFilled(false);
         stop.setBorderPainted(false);
@@ -304,10 +306,10 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
 
         //dBInText
         noise_threshold.setText("53");
-        noise_threshold.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 25));
+        noise_threshold.setFont(new Font("Barlow Condensed Light", Font.PLAIN, 30));
         noise_threshold.setBackground(BACKGROUND_COLOR);
         noise_threshold.setForeground(Color.WHITE);
-        noise_threshold.setBounds(1000, 500, 60, 40); //TODO: set the bounds
+        noise_threshold.setBounds(1082, 500, 60, 40); //TODO: set the bounds
 
         //inputDevice
         inputDevice.setText("Input Device");
@@ -330,10 +332,6 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         settings_on.setIcon(settings_img);
         settings_on.setBounds(1150, 600, 52, 52); //TODO: set the bounds
         settings_on.setFocusable(false);
-        settings_on.setBackground(BACKGROUND_COLOR);
-        settings_on.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 20));
-        settings_on.setForeground(Color.WHITE);
-        settings_on.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
         settings_on.setOpaque(false);
         settings_on.setContentAreaFilled(false);
         settings_on.setBorderPainted(false);
@@ -343,31 +341,25 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         settings_off.setIcon(settings_img);
         settings_off.setBounds(1150, 600, 52, 52); //TODO: set the bounds
         settings_off.setFocusable(false);
-        settings_off.setBackground(BACKGROUND_COLOR);
-        settings_off.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 20));
-        settings_off.setForeground(Color.WHITE);
-        settings_off.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
         settings_off.setOpaque(false);
         settings_off.setContentAreaFilled(false);
         settings_off.setBorderPainted(false);
 
         //threshold up button
-        threshold_up.setText("Increase Limit");
-        threshold_up.setBounds(1000, 450, 100, 40); //TODO: set the bounds
+        threshold_up.setText("");
+        threshold_up.setBounds(1080, 460, 33, 33); //TODO: set the bounds
         threshold_up.setFocusable(false);
-        threshold_up.setBackground(BACKGROUND_COLOR);
-        threshold_up.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 15));
-        threshold_up.setForeground(Color.WHITE);
-        threshold_up.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
+        threshold_up.setOpaque(false);
+        threshold_up.setContentAreaFilled(false);
+        threshold_up.setBorderPainted(false);
 
         //threshold down button
-        threshold_down.setText("Decrease Limit");
-        threshold_down.setBounds(1000, 550, 100, 40); //TODO: set the bounds
+        threshold_down.setText("");
+        threshold_down.setBounds(1080, 550, 33, 33); //TODO: set the bounds
         threshold_down.setFocusable(false);
-        threshold_down.setBackground(BACKGROUND_COLOR);
-        threshold_down.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 15));
-        threshold_down.setForeground(Color.WHITE);
-        threshold_down.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
+        threshold_down.setOpaque(false);
+        threshold_down.setContentAreaFilled(false);
+        threshold_down.setBorderPainted(false);
     }
 
     private void initialize_frame() {
@@ -443,6 +435,20 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         frame.add(settingsIcon);
         settingsIcon.setVisible(true);
         settingsIcon.setEnabled(true);
+
+        ImageIcon dBUpImg = new ImageIcon("src/java/images/upArrow.png");
+        dBUpIcon = new JLabel(dBUpImg);
+        dBUpIcon.setBounds(1080, 460, 33, 33);
+        frame.add(dBUpIcon);
+        dBUpIcon.setVisible(false);
+        dBUpIcon.setEnabled(false);
+
+        ImageIcon dBDownImg = new ImageIcon("src/java/images/downArrow.png");
+        dBDownIcon = new JLabel(dBDownImg);
+        dBDownIcon.setBounds(1080, 550, 33, 33);
+        frame.add(dBDownIcon);
+        dBDownIcon.setVisible(false);
+        dBDownIcon.setEnabled(false);
 
         frame.add(title); // Keep this the last thing
         frame.setVisible(true);
