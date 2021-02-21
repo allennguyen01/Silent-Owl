@@ -133,6 +133,12 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
                     run.setEnabled(false);
                     settings.setVisible(false);
                     settings.setEnabled(false);
+                    noise_threshold.setVisible(false);
+                    noise_threshold.setEnabled(false);
+                    threshold_up.setVisible(false);
+                    threshold_up.setEnabled(false);
+                    threshold_down.setVisible(false);
+                    threshold_down.setEnabled(false);
                     stop.setVisible(true);
                     stop.setEnabled(true);
                     detecting_audio.setVisible(true);
