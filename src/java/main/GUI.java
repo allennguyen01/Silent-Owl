@@ -231,7 +231,7 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
 
         //dBInText
         noise_threshold.setText("53");
-        noise_threshold.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 15));
+        noise_threshold.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 25));
         noise_threshold.setBackground(BACKGROUND_COLOR);
         noise_threshold.setForeground(Color.WHITE);
         noise_threshold.setBounds(1000, 600, 60, 60); //TODO: set the bounds
@@ -263,7 +263,7 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
 
         //threshold up button
         threshold_up.setText("Increase Limit");
-        threshold_up.setBounds(1000,500,100, 60); //TODO: set the bounds
+        threshold_up.setBounds(1000,550,100, 40); //TODO: set the bounds
         threshold_up.setFocusable(false);
         threshold_up.setBackground(BACKGROUND_COLOR);
         threshold_up.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 15));
@@ -272,7 +272,7 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
 
         //threshold down button
         threshold_down.setText("Decrease Limit");
-        threshold_down.setBounds(1000,400,100, 60); //TODO: set the bounds
+        threshold_down.setBounds(1000,500,100, 40); //TODO: set the bounds
         threshold_down.setFocusable(false);
         threshold_down.setBackground(BACKGROUND_COLOR);
         threshold_down.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 15));
