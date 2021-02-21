@@ -19,7 +19,7 @@ public class soundDetect {
     public soundDetect() {
         // Open a TargetDataLine for getting microphone input & sound level
         line = null;
-        format = new AudioFormat(8000, 0, 1, true, true);
+        format = new AudioFormat(44100, 16, 2, true, true);
         info = new DataLine.Info(TargetDataLine.class, format); //     format is an AudioFormat object
         if (!AudioSystem.isLineSupported(info)) {
             System.out.println("The line is not supported.");
@@ -34,8 +34,12 @@ public class soundDetect {
             System.out.println("The TargetDataLine is Unavailable.");
         }
     }
+    
+    public TargetDataLine getLine() {
+        return line;
+    }
 
-    protected static int rms(byte[] audioData) { // audioData might
+    public static int rms(byte[] audioData) { // audioData might
         //be buffered data read from a data line
         long lSum = 0;
         for (int i = 0; i < audioData.length; i++)

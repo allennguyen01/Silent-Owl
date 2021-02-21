@@ -2,6 +2,7 @@ package main;
 
 import java.awt.event.*;
 import javax.swing.*;
+import javax.sound.sampled.TargetDataLine;
 import javax.swing.event.*;
 import java.awt.*;
 
@@ -14,6 +15,7 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
     JButton settings = new JButton();
     JButton graph = new JButton();
     Color BACKGROUND_COLOR = new Color(0x282828);
+    Color PINKY_RED_SALMON = new Color(0xFF7074);
 
     // Settings
     JTextPane settingsTitle = new JTextPane();
@@ -29,31 +31,15 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
 
     // Screen 2
     JButton stop = new JButton("Stop");
+    JTextPane detecting_audio = new JTextPane();
 
 
     // Program is not running
     public GUI() {
-        // Title
-        title.setText("Silent Owl");
-        title.setVerticalAlignment(JLabel.TOP);
-        title.setHorizontalAlignment(JLabel.CENTER);
-        title.setForeground(Color.WHITE);
-        title.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 50));
-
-
-        //settingsTitle
-        settingsTitle.setText("Settings");
-        settingsTitle.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 15));
-        settingsTitle.setBackground(BACKGROUND_COLOR);
-        settingsTitle.setForeground(Color.WHITE);
-        settingsTitle.setBounds(1493, 755, 228, 70); //TODO: set the bounds
-
-        //dBInText
-        dBInText.setText("dB Limit");
-        dBInText.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 15));
-        dBInText.setBackground(BACKGROUND_COLOR);
-        dBInText.setForeground(Color.WHITE);
-        dBInText.setBounds(1381, 844, 291, 43); //TODO: set the bounds
+        initialize_frame();
+        initialize_title();
+        initialize_run_stop();
+        initialize_settings();
 
         dBInText.addFocusListener(new FocusListener() {
             @Override
@@ -69,6 +55,109 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
             }
         });
 
+        stoppedGUI();
+        add_to_frame();
+    }
+
+    // Program is recording audio
+    private void runningGUI() {
+        soundDetect micAudio = new soundDetect();
+        Timer t = new Timer(); // I used a timer here, code is below
+        TargetDataLine audioLine = micAudio.getLine();
+        while (t.seconds < 2) {
+            byte[] bytes = new byte[audioLine.getBufferSize() / 5];
+            audioLine.read(bytes, 0, bytes.length);
+            System.out.println("RMS Level: " + soundDetect.rms(bytes));
+        }
+
+        stop.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (stop.isEnabled()) {
+                    stop.setVisible(false);
+                    stop.setEnabled(false);
+                    run.setVisible(true);
+                    run.setEnabled(true);
+                    detecting_audio.setVisible(false);
+                    detecting_audio.setEnabled(false);
+
+                    stoppedGUI();
+                }
+            }
+        });
+    }
+
+    // Program is stopped
+    private void stoppedGUI() {
+
+        run.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (run.isEnabled()) {
+                    run.setVisible(false);
+                    run.setEnabled(false);
+                    stop.setVisible(true);
+                    stop.setEnabled(true);
+                    detecting_audio.setVisible(true);
+                    detecting_audio.setEnabled(true);
+
+
+
+
+                    runningGUI();
+                }
+            }
+        });
+    }
+
+    private void initialize_run_stop(){
+        //Run button
+        run.setBounds(550,330,200, 90); //TODO: set the bounds
+        run.setFocusable(false);
+        run.setBackground(BACKGROUND_COLOR);
+        run.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 40));
+        run.setForeground(Color.WHITE);
+        run.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
+
+        //stop button
+        stop.setBounds(550,330,200, 90); //TODO: set the bounds
+        stop.setFocusable(false);
+        stop.setBackground(PINKY_RED_SALMON);
+        stop.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 40));
+        stop.setForeground(Color.BLACK);
+        stop.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+
+        detecting_audio.setText("Detecting Audio...");
+        detecting_audio.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 20));
+        detecting_audio.setBackground(BACKGROUND_COLOR);
+        detecting_audio.setForeground(Color.WHITE);
+        detecting_audio.setBounds(550,290,180, 70); //TODO: set the bounds
+    }
+
+    private void initialize_title(){
+        // Title
+        title.setText("Silent Owl");
+        title.setVerticalAlignment(JLabel.TOP);
+        title.setHorizontalAlignment(JLabel.CENTER);
+        title.setForeground(Color.WHITE);
+        title.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 100));
+    }
+
+    private void initialize_settings(){
+        //settingsTitle
+        settingsTitle.setText("Settings");
+        settingsTitle.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 15));
+        settingsTitle.setBackground(BACKGROUND_COLOR);
+        settingsTitle.setForeground(Color.WHITE);
+        settingsTitle.setBounds(1493, 755, 228, 70); //TODO: set the bounds
+
+        //dBInText
+        dBInText.setText("dB Limit");
+        dBInText.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 15));
+        dBInText.setBackground(BACKGROUND_COLOR);
+        dBInText.setForeground(Color.WHITE);
+        dBInText.setBounds(1381, 844, 291, 43); //TODO: set the bounds
+
         //inputDevice
         inputDevice.setText("Input Device");
         inputDevice.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 15));
@@ -83,26 +172,19 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         scheduled.setForeground(Color.WHITE);
         scheduled.setBounds(1492, 935, 178, 41); //TODO: set the bounds
 
-        //Run button
-        run.setVerticalAlignment(JButton.CENTER);
-        run.setHorizontalAlignment(JButton.CENTER);
-        run.setSize(20, 20); //TODO: set the bounds
-        run.setFocusable(false);
-        run.setBackground(BACKGROUND_COLOR);
-        run.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 15));
-        run.setForeground(Color.WHITE);
-        run.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
+        //settings button
+        ImageIcon settings_img = new ImageIcon("java/images/settings.png");
+        //settings.setText("Settings");
+        settings.setIcon(settings_img);
+        settings.setBounds(1200,700,50, 50); //TODO: set the bounds
+        settings.setFocusable(false);
+        settings.setBackground(Color.WHITE);
+        //settings.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 40));
+        //settings.setForeground(Color.WHITE);
+        settings.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
+    }
 
-        run.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (run.isEnabled()) {
-
-                    runningGUI();
-                }
-            }
-        });
-
+    private void initialize_frame(){
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.addWindowListener(new WindowAdapter() {
             @Override
@@ -113,20 +195,21 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         frame.getContentPane().setBackground(BACKGROUND_COLOR);
         frame.setSize(1280, 720);
         frame.setResizable(false);
-
-        //frame.setLayout(new GridLayout());
-        frame.add(title);
-        //frame.add(run);
-        //frame.add(dBInput);
-        // ADD FRAMES HERE
-        frame.setVisible(true);
-
-
     }
 
-    // Program is recording audio
-    private void runningGUI() {
+    private void add_to_frame(){
+        // ADD FRAMES HERE
+        frame.add(run);
+        frame.add(stop);
+        frame.add(scheduled);
+        frame.add(detecting_audio);
+        detecting_audio.setVisible(false);
+        detecting_audio.setEnabled(false);
+        frame.add(settings);
 
+
+        frame.add(title); // Keep this the last thing
+        frame.setVisible(true);
     }
 
 }
