@@ -251,7 +251,8 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         scheduled.setBounds(1492, 935, 178, 41); //TODO: set the bounds
 
         //settings button
-        ImageIcon settings_img = new ImageIcon("java/images/settings.png");
+        ImageIcon settings_img = new ImageIcon("java/images/settings" +
+            ".png");
         settings.setText("Settings");
         settings.setIcon(settings_img);
         settings.setBounds(1100,600,80, 50); //TODO: set the bounds
