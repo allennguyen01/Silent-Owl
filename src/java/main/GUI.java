@@ -1,10 +1,13 @@
 package main;
 
 import java.awt.event.*;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.sound.sampled.TargetDataLine;
 import javax.swing.event.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class GUI extends JFrame { //implements ActionListener, ChangeListener {
 
@@ -16,6 +19,7 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
     JButton graph = new JButton();
     Color BACKGROUND_COLOR = new Color(0x282828);
     Color PINKY_RED_SALMON = new Color(0xFF7074);
+    private boolean is_running;
 
     // Settings
     JTextPane settingsTitle = new JTextPane();
@@ -61,14 +65,20 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
 
     // Program is recording audio
     private void runningGUI() {
+
         soundDetect micAudio = new soundDetect();
-        Timer t = new Timer(); // I used a timer here, code is below
         TargetDataLine audioLine = micAudio.getLine();
-        while (t.seconds < 2) {
-            byte[] bytes = new byte[audioLine.getBufferSize() / 5];
-            audioLine.read(bytes, 0, bytes.length);
-            System.out.println("RMS Level: " + soundDetect.rms(bytes));
-        }
+
+        //run.addActionListener(new ActionListener() {
+            //@Override
+            //public void actionPerformed(ActionEvent e) {
+                while (is_running) {
+                    byte[] bytes = new byte[audioLine.getBufferSize() / 5];
+                    audioLine.read(bytes, 0, bytes.length);
+                    System.out.println("RMS Level: " + soundDetect.rms(bytes));
+                }
+            //}
+        //});
 
         stop.addActionListener(new ActionListener() {
             @Override
@@ -80,6 +90,7 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
                     run.setEnabled(true);
                     detecting_audio.setVisible(false);
                     detecting_audio.setEnabled(false);
+                    is_running = false;
 
                     stoppedGUI();
                 }
@@ -89,7 +100,7 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
 
     // Program is stopped
     private void stoppedGUI() {
-
+        is_running = false;
         run.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -100,9 +111,7 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
                     stop.setEnabled(true);
                     detecting_audio.setVisible(true);
                     detecting_audio.setEnabled(true);
-
-
-
+                    is_running = true;
 
                     runningGUI();
                 }
@@ -174,13 +183,13 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
 
         //settings button
         ImageIcon settings_img = new ImageIcon("java/images/settings.png");
-        //settings.setText("Settings");
+        settings.setText("Settings");
         settings.setIcon(settings_img);
-        settings.setBounds(1200,700,50, 50); //TODO: set the bounds
+        settings.setBounds(1100,600,80, 50); //TODO: set the bounds
         settings.setFocusable(false);
-        settings.setBackground(Color.WHITE);
-        //settings.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 40));
-        //settings.setForeground(Color.WHITE);
+        settings.setBackground(BACKGROUND_COLOR);
+        settings.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 20));
+        settings.setForeground(Color.WHITE);
         settings.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
     }
 
@@ -206,7 +215,8 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         detecting_audio.setVisible(false);
         detecting_audio.setEnabled(false);
         frame.add(settings);
-
+        settings.setVisible(true);
+        settings.setEnabled(true);
 
         frame.add(title); // Keep this the last thing
         frame.setVisible(true);
