@@ -13,8 +13,14 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
     // Text/Buttons that are always on screen
     JLabel title = new JLabel();
     JLabel owlImage;
+<<<<<<< HEAD
     JButton settings = new JButton();
     JLabel settingsIcon;
+=======
+    JButton settings_on = new JButton();
+    JButton settings_off = new JButton();
+    JButton graph = new JButton();
+>>>>>>> 14d2ae2ebf9b809e3e4dd3524aa68260d5993936
     Color BACKGROUND_COLOR = new Color(0x282828);
     Color PINKY_RED_SALMON = new Color(0xFF7074);
     private boolean is_running;
@@ -27,8 +33,8 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
     JTextPane inputDevice = new JTextPane();
     JTextPane scheduled = new JTextPane();
     private boolean settings_open = false;
-    //input device menu
-    //scheduled
+    JTextPane scheduler_start = new JTextPane();
+    JTextPane scheduler_end = new JTextPane();
 
     // Screen 1
     JButton run = new JButton("");
@@ -65,7 +71,7 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
                 while (is_running) {
                     byte[] bytes = new byte[audioLine.getBufferSize() / 5];
                     audioLine.read(bytes, 0, bytes.length);
-                    System.out.println("RMS Level: " + soundDetect.rms(bytes));
+                    //System.out.println("RMS Level: " + soundDetect.rms(bytes));
                     String noise = String.valueOf(soundDetect.rms(bytes));
                     if (soundDetect.rms(bytes) > Integer.parseInt(noise_threshold.getText())) {
                         noise_level.setForeground(PINKY_RED_SALMON);
@@ -99,8 +105,8 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
                             stop.setEnabled(false);
                             run.setVisible(true);
                             run.setEnabled(true);
-                            settings.setVisible(true);
-                            settings.setEnabled(true);
+                            settings_on.setVisible(true);
+                            settings_on.setEnabled(true);
                             detecting_audio.setVisible(false);
                             detecting_audio.setEnabled(false);
                             click_to_start.setVisible(true);
@@ -122,12 +128,6 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         };
         t1.start();
         t2.start();
-        /*try {
-            t2.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
-
 
     }
 
@@ -137,12 +137,9 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
 
         owlOffImage.setEnabled(true);
         owlOffImage.setVisible(true);
-
-        if (settings_open) {
-            close_settings();
-        } else {
-            open_settings();
-        }
+        
+        open_settings();
+        close_settings();
         do_threshold_up();
         do_threshold_down();
         run.addActionListener(new ActionListener() {
@@ -153,8 +150,10 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
                     owlOffImage.setEnabled(false);
                     run.setVisible(false);
                     run.setEnabled(false);
-                    settings.setVisible(false);
-                    settings.setEnabled(false);
+                    settings_on.setVisible(false);
+                    settings_on.setEnabled(false);
+                    settings_off.setVisible(false);
+                    settings_off.setEnabled(false);
                     noise_threshold.setVisible(false);
                     noise_threshold.setEnabled(false);
                     threshold_up.setVisible(false);
@@ -178,10 +177,10 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
     }
 
     private void open_settings() {
-        settings.addActionListener(new ActionListener() {
+        settings_on.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (settings.isEnabled()) {
+                if (settings_on.isEnabled()) {
                     noise_threshold.setVisible(true);
                     noise_threshold.setEnabled(true);
                     threshold_up.setVisible(true);
@@ -189,6 +188,10 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
                     threshold_down.setVisible(true);
                     threshold_down.setEnabled(true);
                     settings_open = true;
+                    settings_on.setVisible(false);
+                    settings_on.setEnabled(false);
+                    settings_off.setVisible(true);
+                    settings_off.setEnabled(true);
                     //settings.removeActionListener(this);
                 }
             }
@@ -197,16 +200,20 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
     }
 
     private void close_settings() {
-        settings.addActionListener(new ActionListener() {
+        settings_off.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (settings.isEnabled()) {
+                if (settings_off.isEnabled()) {
                     noise_threshold.setVisible(false);
                     noise_threshold.setEnabled(false);
                     threshold_up.setVisible(false);
                     threshold_up.setEnabled(false);
                     threshold_down.setVisible(false);
                     threshold_down.setEnabled(false);
+                    settings_on.setVisible(true);
+                    settings_on.setEnabled(true);
+                    settings_off.setVisible(false);
+                    settings_off.setEnabled(false);
                     settings_open = false;
                 }
             }
@@ -302,7 +309,7 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         noise_threshold.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 25));
         noise_threshold.setBackground(BACKGROUND_COLOR);
         noise_threshold.setForeground(Color.WHITE);
-        noise_threshold.setBounds(1000, 600, 60, 60); //TODO: set the bounds
+        noise_threshold.setBounds(1000, 500, 60, 40); //TODO: set the bounds
 
         //inputDevice
         inputDevice.setText("Input Device");
@@ -318,9 +325,10 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         scheduled.setForeground(Color.WHITE);
         scheduled.setBounds(1492, 935, 178, 41); //TODO: set the bounds
 
-        //settings button
+        //settings_on button
         ImageIcon settings_img = new ImageIcon("java/images/settings" +
             ".png");
+<<<<<<< HEAD
         settings.setText("");
         settings.setIcon(settings_img);
         settings.setBounds(1100, 600, 80, 50); //TODO: set the bounds
@@ -332,10 +340,30 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         settings.setOpaque(false);
         settings.setContentAreaFilled(false);
         settings.setBorderPainted(false);
+=======
+        settings_on.setText("Settings");
+        settings_on.setIcon(settings_img);
+        settings_on.setBounds(1100, 600, 80, 50); //TODO: set the bounds
+        settings_on.setFocusable(false);
+        settings_on.setBackground(BACKGROUND_COLOR);
+        settings_on.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 20));
+        settings_on.setForeground(Color.WHITE);
+        settings_on.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
+
+        //settings_off button
+        settings_off.setText("Settings");
+        settings_off.setIcon(settings_img);
+        settings_off.setBounds(1100, 600, 80, 50); //TODO: set the bounds
+        settings_off.setFocusable(false);
+        settings_off.setBackground(BACKGROUND_COLOR);
+        settings_off.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 20));
+        settings_off.setForeground(Color.WHITE);
+        settings_off.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
+>>>>>>> 14d2ae2ebf9b809e3e4dd3524aa68260d5993936
 
         //threshold up button
         threshold_up.setText("Increase Limit");
-        threshold_up.setBounds(1000, 500, 100, 40); //TODO: set the bounds
+        threshold_up.setBounds(1000, 450, 100, 40); //TODO: set the bounds
         threshold_up.setFocusable(false);
         threshold_up.setBackground(BACKGROUND_COLOR);
         threshold_up.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 15));
@@ -393,9 +421,12 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         click_to_start.setEnabled(true);
         detecting_audio.setVisible(false);
         detecting_audio.setEnabled(false);
-        frame.add(settings);
-        settings.setVisible(true);
-        settings.setEnabled(true);
+        frame.add(settings_on);
+        settings_on.setVisible(true);
+        settings_on.setEnabled(true);
+        frame.add(settings_off);
+        settings_off.setVisible(false);
+        settings_off.setEnabled(false);
         frame.add(noise_level);
         noise_level.setVisible(false);
         noise_level.setEnabled(false);
