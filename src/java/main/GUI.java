@@ -168,26 +168,26 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
 
     private void initialize_run_stop(){
         //Run button
-        run.setBounds(540,330,200, 90); //TODO: set the bounds
+        run.setBounds(527,400,211, 80); //TODO: set the bounds
         run.setFocusable(false);
         run.setBackground(BACKGROUND_COLOR);
-        run.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 40));
+        run.setFont(new Font("Barlow Condensed Light", Font.PLAIN, 60));
         run.setForeground(Color.WHITE);
         run.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
 
         //stop button
-        stop.setBounds(540,330,200, 90); //TODO: set the bounds
+        stop.setBounds(527,400,211, 80); //TODO: set the bounds
         stop.setFocusable(false);
         stop.setBackground(PINKY_RED_SALMON);
-        stop.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 40));
+        stop.setFont(new Font("Barlow Condensed Light", Font.PLAIN, 60));
         stop.setForeground(Color.BLACK);
         stop.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 
         detecting_audio.setText("Detecting Audio...");
-        detecting_audio.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 20));
+        detecting_audio.setFont(new Font("Barlow Condensed Light", Font.PLAIN, 40));
         detecting_audio.setBackground(BACKGROUND_COLOR);
         detecting_audio.setForeground(Color.WHITE);
-        detecting_audio.setBounds(540,290,180, 70); //TODO: set the bounds
+        detecting_audio.setBounds(510,340,240, 55); //TODO: set the bounds
 
         noise_level.setText("0");
         noise_level.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 30));
@@ -254,6 +254,8 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
                 frame.setExtendedState(JFrame.ICONIFIED);
             }
         });
+        ImageIcon logo = new ImageIcon("src/java/images/icon3.png");
+        frame.setIconImage(logo.getImage());
         frame.getContentPane().setBackground(BACKGROUND_COLOR);
         frame.setSize(1280, 720);
         frame.setResizable(false);
@@ -261,10 +263,10 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
 
     private void add_to_frame(){
         // ADD FRAMES HERE
+        frame.add(detecting_audio);
         frame.add(run);
         frame.add(stop);
         frame.add(scheduled);
-        frame.add(detecting_audio);
         detecting_audio.setVisible(false);
         detecting_audio.setEnabled(false);
         frame.add(settings);
