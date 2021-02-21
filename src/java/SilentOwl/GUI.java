@@ -103,6 +103,7 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
                             run.setEnabled(true);
                             settings_on.setVisible(true);
                             settings_on.setEnabled(true);
+                            settingsIcon.setVisible(true);
                             detecting_audio.setVisible(false);
                             detecting_audio.setEnabled(false);
                             click_to_start.setVisible(true);
@@ -150,6 +151,7 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
                     settings_on.setEnabled(false);
                     settings_off.setVisible(false);
                     settings_off.setEnabled(false);
+                    settingsIcon.setVisible(false);
                     noise_threshold.setVisible(false);
                     noise_threshold.setEnabled(false);
                     threshold_up.setVisible(false);
