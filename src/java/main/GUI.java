@@ -78,6 +78,18 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
                     byte[] bytes = new byte[audioLine.getBufferSize() / 5];
                     audioLine.read(bytes, 0, bytes.length);
                     System.out.println("RMS Level: " + soundDetect.rms(bytes));
+                    if(soundDetect.rms(bytes) > 30){
+                        try
+                        {
+                            Clip clip = AudioSystem.getClip();
+                            clip.open(AudioSystem.getAudioInputStream(new File("src/java/images/alert2.wav")));
+                            clip.start();
+                        }
+                        catch (Exception exc)
+                        {
+                            exc.printStackTrace(System.out);
+                        }
+                    }
                 }
                 audioLine.close();
             }
