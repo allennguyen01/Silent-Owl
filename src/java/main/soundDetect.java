@@ -55,6 +55,23 @@ public class soundDetect {
         return (int) (Math.pow(averageMeanSquare, 0.5d) + 0.5);
     }
 
+    public static int peak(byte[] audioData) {
+        int peak = 0;
+
+        for (int i = 0; i < audioData.length; i++) {
+            if (audioData[i] > peak) {
+                peak = audioData[i];
+            }
+        }
+        return peak;
+    }
+
+    public static void printByte(byte[] audioData) {
+        for (int i = 0; i < audioData.length; i++) {
+            System.out.println(audioData[i]);
+        }
+    }
+
     public static void main(String[] args) {
 
         soundDetect test = new soundDetect();

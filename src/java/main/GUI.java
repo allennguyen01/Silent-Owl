@@ -19,6 +19,7 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
 
     // Text/Buttons that are always on screen
     JLabel title = new JLabel();
+    JLabel owlImage;
     JButton settings = new JButton();
     JButton graph = new JButton();
     Color BACKGROUND_COLOR = new Color(0x282828);
@@ -81,7 +82,7 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
                     System.out.println("RMS Level: " + soundDetect.rms(bytes));
                     String noise = String.valueOf(soundDetect.rms(bytes));
                     noise_level.setText(noise);
-                    if(soundDetect.rms(bytes) > 55){
+                    if(soundDetect.rms(bytes) > 53){
                         try
                         {
                             Clip clip = AudioSystem.getClip();
@@ -184,7 +185,7 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         title.setVerticalAlignment(JLabel.TOP);
         title.setHorizontalAlignment(JLabel.CENTER);
         title.setForeground(Color.WHITE);
-        title.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 100));
+        title.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 260));
     }
 
     private void initialize_settings(){
@@ -255,6 +256,13 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         frame.add(noise_level);
         noise_level.setVisible(false);
         noise_level.setEnabled(false);
+
+        ImageIcon img = new ImageIcon("C:\\Users\\Chris\\IdeaProjects\\BC-Hacks-2.0\\src\\java\\images\\Owl.png");
+        owlImage = new JLabel(img);
+        owlImage.setBounds(747, 115, 121, 194);
+        frame.add(owlImage);
+        owlImage.setVisible(true);
+        owlImage.setEnabled(true);
 
         frame.add(title); // Keep this the last thing
         frame.setVisible(true);
