@@ -176,11 +176,7 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
 
     private void initialize_run_stop(){
         //Run button
-<<<<<<< HEAD
         run.setBounds(527,400,211, 80); //TODO: set the bounds
-=======
-        run.setBounds(540,380,200, 90); //TODO: set the bounds
->>>>>>> a3e3c72ad08b27deaf75c1fb6beafcee45f3ddf6
         run.setFocusable(false);
         run.setBackground(BACKGROUND_COLOR);
         run.setFont(new Font("Barlow Condensed Light", Font.PLAIN, 60));
@@ -188,11 +184,7 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         run.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
 
         //stop button
-<<<<<<< HEAD
         stop.setBounds(527,400,211, 80); //TODO: set the bounds
-=======
-        stop.setBounds(540,380,200, 90); //TODO: set the bounds
->>>>>>> a3e3c72ad08b27deaf75c1fb6beafcee45f3ddf6
         stop.setFocusable(false);
         stop.setBackground(PINKY_RED_SALMON);
         stop.setFont(new Font("Barlow Condensed Light", Font.PLAIN, 60));
@@ -203,11 +195,7 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         detecting_audio.setFont(new Font("Barlow Condensed Light", Font.PLAIN, 40));
         detecting_audio.setBackground(BACKGROUND_COLOR);
         detecting_audio.setForeground(Color.WHITE);
-<<<<<<< HEAD
         detecting_audio.setBounds(510,340,240, 55); //TODO: set the bounds
-=======
-        detecting_audio.setBounds(540,330,180, 50); //TODO: set the bounds
->>>>>>> a3e3c72ad08b27deaf75c1fb6beafcee45f3ddf6
 
         noise_level.setText("0");
         noise_level.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 30));
