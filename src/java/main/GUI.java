@@ -125,6 +125,8 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         } else {
             open_settings();
         }
+        do_threshold_up();
+        do_threshold_down();
         run.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -182,6 +184,30 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
                     threshold_down.setVisible(false);
                     threshold_down.setEnabled(false);
                     settings_open = false;
+                }
+            }
+        });
+    }
+
+    private synchronized void do_threshold_up(){
+        threshold_up.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (threshold_up.isEnabled()) {
+                    int threshold = Integer.parseInt(noise_threshold.getText()) + 1;
+                    noise_threshold.setText(String.valueOf(threshold));
+                }
+            }
+        });
+    }
+
+    private synchronized void do_threshold_down(){
+        threshold_down.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (threshold_down.isEnabled()) {
+                    int threshold = Integer.parseInt(noise_threshold.getText()) - 1;
+                    noise_threshold.setText(String.valueOf(threshold));
                 }
             }
         });
