@@ -64,42 +64,48 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
     }
 
     // Program is recording audio
-    private void runningGUI() {
+    private synchronized void runningGUI() {
 
-        soundDetect micAudio = new soundDetect();
-        TargetDataLine audioLine = micAudio.getLine();
-
-        //run.addActionListener(new ActionListener() {
-            //@Override
-            //public void actionPerformed(ActionEvent e) {
+        Thread t1 = new Thread(){
+            public void run(){
+                soundDetect micAudio = new soundDetect();
+                TargetDataLine audioLine = micAudio.getLine();
                 while (is_running) {
                     byte[] bytes = new byte[audioLine.getBufferSize() / 5];
                     audioLine.read(bytes, 0, bytes.length);
                     System.out.println("RMS Level: " + soundDetect.rms(bytes));
                 }
-            //}
-        //});
-
-        stop.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (stop.isEnabled()) {
-                    stop.setVisible(false);
-                    stop.setEnabled(false);
-                    run.setVisible(true);
-                    run.setEnabled(true);
-                    detecting_audio.setVisible(false);
-                    detecting_audio.setEnabled(false);
-                    is_running = false;
-
-                    stoppedGUI();
-                }
             }
-        });
+        };
+
+        Thread t2 = new Thread(){
+            public void run(){
+                stop.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (stop.isEnabled()) {
+                            stop.setVisible(false);
+                            stop.setEnabled(false);
+                            run.setVisible(true);
+                            run.setEnabled(true);
+                            detecting_audio.setVisible(false);
+                            detecting_audio.setEnabled(false);
+                            is_running = false;
+
+                            stoppedGUI();
+                        }
+
+                    }
+                });
+            }
+        };
+        t1.start();
+        t2.start();
+
     }
 
     // Program is stopped
-    private void stoppedGUI() {
+    private synchronized void stoppedGUI() {
         is_running = false;
         run.addActionListener(new ActionListener() {
             @Override
