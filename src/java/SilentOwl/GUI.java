@@ -77,7 +77,7 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
                         try {
                             Clip clip = AudioSystem.getClip();
                             clip.open(AudioSystem.getAudioInputStream(new File("src/java/images" +
-                                "/alert2.wav")));
+                                "/hoot.wav")));
                             clip.start();
                         } catch (Exception exc) {
                             exc.printStackTrace(System.out);
@@ -259,14 +259,14 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
 
     private void initialize_run_stop() {
         //Run button
-        run.setBounds(527, 400, 211, 80); //TODO: set the bounds
+        run.setBounds(585, 420, 93, 125); //TODO: set the bounds
         run.setFocusable(false);
         run.setOpaque(false);
         run.setContentAreaFilled(false);
         run.setBorderPainted(false);
 
         //stop button
-        stop.setBounds(527, 400, 211, 80); //TODO: set the bounds
+        stop.setBounds(460, 410, 349, 151); //TODO: set the bounds
         stop.setFocusable(false);
         stop.setOpaque(false);
         stop.setContentAreaFilled(false);
