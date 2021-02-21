@@ -1,6 +1,5 @@
-<img src="src\java\images\icon3.png" align = "center" style="margin: 0 auto;" />
 # BC-Hacks-2.0 
-
+<img src="src\java\images\icon3.png" align = "center" style="margin: 0 auto;" />
 Do you have roommates or people that live just a wall or two away? Are you a chronic night owl?
 If so, you’ve probably run into issues keeping yourself quiet late at night when having fun with your fellow insomniacs.  Luckily for you there is a hot new app floating around to manage your late-night outbursts.
 
