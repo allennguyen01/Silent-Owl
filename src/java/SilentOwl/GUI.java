@@ -1,6 +1,4 @@
-package main;
-
-import com.sun.jdi.IntegerValue;
+package SilentOwl;
 
 import java.awt.event.*;
 import javax.sound.sampled.*;
@@ -34,10 +32,13 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
     //scheduled
 
     // Screen 1
-    JButton run = new JButton("Run");
+    JButton run = new JButton("");
+    JLabel owlOffImage;
+    JTextPane click_to_start = new JTextPane();
 
     // Screen 2
-    JButton stop = new JButton("Stop");
+    JButton stop = new JButton("");
+    JLabel owlOnImage;
     JTextPane detecting_audio = new JTextPane();
     JTextPane noise_level = new JTextPane();
 
@@ -55,6 +56,8 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
 
     // Program is recording audio
     private void runningGUI() {
+        owlOnImage.setEnabled(true);
+        owlOnImage.setVisible(true);
 
         Thread t1 = new Thread(){
             public void run(){
@@ -93,6 +96,8 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (stop.isEnabled()) {
+                            owlOnImage.setVisible(false);
+                            owlOnImage.setEnabled(false);
                             stop.setVisible(false);
                             stop.setEnabled(false);
                             run.setVisible(true);
@@ -101,6 +106,8 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
                             settings.setEnabled(true);
                             detecting_audio.setVisible(false);
                             detecting_audio.setEnabled(false);
+                            click_to_start.setVisible(true);
+                            click_to_start.setVisible(true);
                             noise_level.setVisible(false);
                             noise_level.setEnabled(false);
                             is_running = false;
@@ -120,6 +127,9 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
     private void stoppedGUI() {
         is_running = false;
 
+        owlOffImage.setEnabled(true);
+        owlOffImage.setVisible(true);
+
         if(settings_open){
             close_settings();
         } else {
@@ -129,6 +139,8 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (run.isEnabled()) {
+                    owlOffImage.setVisible(false);
+                    owlOffImage.setEnabled(false);
                     run.setVisible(false);
                     run.setEnabled(false);
                     settings.setVisible(false);
@@ -137,6 +149,8 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
                     stop.setEnabled(true);
                     detecting_audio.setVisible(true);
                     detecting_audio.setEnabled(true);
+                    click_to_start.setVisible(false);
+                    click_to_start.setVisible(false);
                     noise_level.setVisible(true);
                     noise_level.setEnabled(true);
                     is_running = true;
@@ -176,44 +190,44 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
 
     private void initialize_run_stop(){
         //Run button
-<<<<<<< HEAD
-        run.setBounds(527,400,211, 80); //TODO: set the bounds
-=======
-        run.setBounds(540,380,200, 90); //TODO: set the bounds
->>>>>>> a3e3c72ad08b27deaf75c1fb6beafcee45f3ddf6
+        run.setBounds(586,422,95, 120); //TODO: set the bounds
         run.setFocusable(false);
-        run.setBackground(BACKGROUND_COLOR);
-        run.setFont(new Font("Barlow Condensed Light", Font.PLAIN, 60));
-        run.setForeground(Color.WHITE);
-        run.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
+//        run.setBackground(BACKGROUND_COLOR);
+//        run.setFont(new Font("Barlow Condensed Light", Font.PLAIN, 60));
+//        run.setForeground(Color.WHITE);
+//        run.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
+        run.setOpaque(false);
+        run.setContentAreaFilled(false);
+        run.setBorderPainted(false);
 
         //stop button
-<<<<<<< HEAD
-        stop.setBounds(527,400,211, 80); //TODO: set the bounds
-=======
-        stop.setBounds(540,380,200, 90); //TODO: set the bounds
->>>>>>> a3e3c72ad08b27deaf75c1fb6beafcee45f3ddf6
+        stop.setBounds(458,410,349, 151); //TODO: set the bounds
         stop.setFocusable(false);
-        stop.setBackground(PINKY_RED_SALMON);
-        stop.setFont(new Font("Barlow Condensed Light", Font.PLAIN, 60));
-        stop.setForeground(Color.BLACK);
-        stop.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+//        stop.setBackground(PINKY_RED_SALMON);
+//        stop.setFont(new Font("Barlow Condensed Light", Font.PLAIN, 60));
+//        stop.setForeground(Color.BLACK);
+//        stop.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+        stop.setOpaque(false);
+        stop.setContentAreaFilled(false);
+        stop.setBorderPainted(false);
+
+        click_to_start.setText("Click to start detecting audio");
+        click_to_start.setFont(new Font("Barlow Condensed Light", Font.PLAIN, 40));
+        click_to_start.setBackground(BACKGROUND_COLOR);
+        click_to_start.setForeground(Color.WHITE);
+        click_to_start.setBounds(437, 340, 395, 55);
 
         detecting_audio.setText("Detecting Audio...");
         detecting_audio.setFont(new Font("Barlow Condensed Light", Font.PLAIN, 40));
         detecting_audio.setBackground(BACKGROUND_COLOR);
         detecting_audio.setForeground(Color.WHITE);
-<<<<<<< HEAD
-        detecting_audio.setBounds(510,340,240, 55); //TODO: set the bounds
-=======
-        detecting_audio.setBounds(540,330,180, 50); //TODO: set the bounds
->>>>>>> a3e3c72ad08b27deaf75c1fb6beafcee45f3ddf6
+        detecting_audio.setBounds(522,340,240, 55); //TODO: set the bounds
 
         noise_level.setText("0");
         noise_level.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 30));
         noise_level.setBackground(BACKGROUND_COLOR);
         noise_level.setForeground(Color.WHITE);
-        noise_level.setBounds(635,510,90, 90); //TODO: set the bounds
+        noise_level.setBounds(620,570,90, 90); //TODO: set the bounds
     }
 
     private void initialize_title(){
@@ -279,14 +293,31 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         frame.getContentPane().setBackground(BACKGROUND_COLOR);
         frame.setSize(1280, 720);
         frame.setResizable(false);
+
+        ImageIcon offImg = new ImageIcon("src/java/images/owlOff.png");
+        owlOffImage = new JLabel(offImg);
+        owlOffImage.setBounds(586, 400, 116, 142);
+        frame.add(owlOffImage);
+        owlOffImage.setVisible(false);
+        owlOffImage.setEnabled(false);
+
+        ImageIcon onImg = new ImageIcon("src/java/images/owlOn.png");
+        owlOnImage = new JLabel(onImg);
+        owlOnImage.setBounds(458, 410, 349, 151);
+        frame.add(owlOnImage);
+        owlOnImage.setVisible(false);
+        owlOnImage.setEnabled(false);
     }
 
     private void add_to_frame(){
         // ADD FRAMES HERE
         frame.add(detecting_audio);
+        frame.add(click_to_start);
         frame.add(run);
         frame.add(stop);
         frame.add(scheduled);
+        click_to_start.setVisible(true);
+        click_to_start.setEnabled(true);
         detecting_audio.setVisible(false);
         detecting_audio.setEnabled(false);
         frame.add(settings);
