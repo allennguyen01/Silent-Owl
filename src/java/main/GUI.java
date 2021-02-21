@@ -1,13 +1,17 @@
 package main;
 
+import java.applet.Applet;
 import java.awt.event.*;
 import javax.imageio.ImageIO;
+import javax.sound.sampled.*;
 import javax.swing.*;
-import javax.sound.sampled.TargetDataLine;
 import javax.swing.event.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.io.File;
 
 public class GUI extends JFrame { //implements ActionListener, ChangeListener {
 
@@ -64,7 +68,7 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
     }
 
     // Program is recording audio
-    private synchronized void runningGUI() {
+    private void runningGUI() {
 
         Thread t1 = new Thread(){
             public void run(){
@@ -75,6 +79,7 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
                     audioLine.read(bytes, 0, bytes.length);
                     System.out.println("RMS Level: " + soundDetect.rms(bytes));
                 }
+                audioLine.close();
             }
         };
 
@@ -91,7 +96,6 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
                             detecting_audio.setVisible(false);
                             detecting_audio.setEnabled(false);
                             is_running = false;
-
                             stoppedGUI();
                         }
 
@@ -105,7 +109,7 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
     }
 
     // Program is stopped
-    private synchronized void stoppedGUI() {
+    private void stoppedGUI() {
         is_running = false;
         run.addActionListener(new ActionListener() {
             @Override
