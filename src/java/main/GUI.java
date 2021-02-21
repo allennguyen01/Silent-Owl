@@ -71,7 +71,8 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
                         try
                         {
                             Clip clip = AudioSystem.getClip();
-                            clip.open(AudioSystem.getAudioInputStream(new File("src/java/images/alert2.wav")));
+                            clip.open(AudioSystem.getAudioInputStream(new File("src/java/images" +
+                                "/alert2.wav")));
                             clip.start();
                         }
                         catch (Exception exc)
