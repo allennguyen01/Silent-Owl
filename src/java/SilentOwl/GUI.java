@@ -350,6 +350,9 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         frame.setSize(1280, 720);
         frame.setResizable(false);
 
+        ImageIcon logo = new ImageIcon("src/java/images/icon3.png");
+        frame.setIconImage(logo.getImage());
+
         ImageIcon offImg = new ImageIcon("src/java/images/owlOff.png");
         owlOffImage = new JLabel(offImg);
         owlOffImage.setBounds(586, 400, 116, 142);
