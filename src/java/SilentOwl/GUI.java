@@ -14,7 +14,7 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
     JLabel title = new JLabel();
     JLabel owlImage;
     JButton settings = new JButton();
-    JButton graph = new JButton();
+    JLabel settingsIcon;
     Color BACKGROUND_COLOR = new Color(0x282828);
     Color PINKY_RED_SALMON = new Color(0xFF7074);
     private boolean is_running;
@@ -26,7 +26,6 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
     JButton threshold_down = new JButton();
     JTextPane inputDevice = new JTextPane();
     JTextPane scheduled = new JTextPane();
-    JTextField dBInput = new JTextField();
     private boolean settings_open = false;
     //input device menu
     //scheduled
@@ -171,7 +170,6 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
                     noise_level.setVisible(true);
                     noise_level.setEnabled(true);
                     is_running = true;
-
 
                     runningGUI();
                 }
@@ -323,14 +321,17 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         //settings button
         ImageIcon settings_img = new ImageIcon("java/images/settings" +
             ".png");
-        settings.setText("Settings");
+        settings.setText("");
         settings.setIcon(settings_img);
         settings.setBounds(1100, 600, 80, 50); //TODO: set the bounds
         settings.setFocusable(false);
-        settings.setBackground(BACKGROUND_COLOR);
-        settings.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 20));
-        settings.setForeground(Color.WHITE);
-        settings.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
+//        settings.setBackground(BACKGROUND_COLOR);
+//        settings.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 20));
+//        settings.setForeground(Color.WHITE);
+//        settings.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
+        settings.setOpaque(false);
+        settings.setContentAreaFilled(false);
+        settings.setBorderPainted(false);
 
         //threshold up button
         threshold_up.setText("Increase Limit");
@@ -414,6 +415,13 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         frame.add(owlImage);
         owlImage.setVisible(true);
         owlImage.setEnabled(true);
+
+        ImageIcon settingsImg = new ImageIcon("src/java/images/settingsIcon.png");
+        settingsIcon = new JLabel(settingsImg);
+        settingsIcon.setBounds(1150, 600, 52, 52);
+        frame.add(settingsIcon);
+        settingsIcon.setVisible(true);
+        settingsIcon.setEnabled(true);
 
         frame.add(title); // Keep this the last thing
         frame.setVisible(true);
