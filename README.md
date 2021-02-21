@@ -8,3 +8,7 @@ Silent Owl uses your computer’s microphone to monitor your volume and provides
 
 
 <img src="src\java\images\icon3.png" align = "center" style="margin: 0 auto;" />
+
+<img src="src\java\images\silentowl1.png" align = "center" style="margin: 0 auto;" />
+
+<img src="src\java\images\silentowl4.png" align = "center" style="margin: 0 auto;" />
