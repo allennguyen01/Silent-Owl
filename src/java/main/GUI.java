@@ -84,10 +84,22 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         scheduled.setBounds(1492, 935, 178, 41); //TODO: set the bounds
 
         //Run button
+        run.setBounds(20,20,20,20); //TODO: set the bounds
+        run.setFocusable(false);
+        run.setBackground(BACKGROUND_COLOR);
+        run.setFont(new Font("Barlow Condensed ExtraLight",Font.PLAIN,15));
+        run.setForeground(Color.WHITE);
+        run.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
 
+        run.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(run.isEnabled()){
 
-
-
+                    runningGUI();
+                }
+            }
+        });
 
 
 
@@ -96,19 +108,18 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         frame.setResizable(false);
 
         frame.add(title);
+        frame.add(run);
         // ADD FRAMES HERE
         frame.setVisible(true);
 
+        frame.setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setBackground(BACKGROUND_COLOR);
     }
 
     // Program is recording audio
     private void runningGUI() {
 
-    }
-
-    public static void main(String[] args) {
-        GUI gui = new GUI();
     }
 
 }

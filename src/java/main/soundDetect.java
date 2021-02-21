@@ -1,6 +1,6 @@
 package main;
 
-import javax.sound.*;
+/*import javax.sound.*;
 
 public class soundDetect {
     AudioFormat micAudio = new AudioFormat();
@@ -8,4 +8,4 @@ public class soundDetect {
     public AudioFormat getMicAudio() {
         return micAudio;
     }
-}
+}*/
