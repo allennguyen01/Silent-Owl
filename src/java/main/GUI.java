@@ -154,6 +154,10 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
                 if (settings.isEnabled()) {
                     noise_threshold.setVisible(true);
                     noise_threshold.setEnabled(true);
+                    threshold_up.setVisible(true);
+                    threshold_up.setEnabled(true);
+                    threshold_down.setVisible(true);
+                    threshold_down.setEnabled(true);
                     settings_open = true;
                 }
             }
@@ -167,6 +171,10 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
                 if (settings.isEnabled()) {
                     noise_threshold.setVisible(false);
                     noise_threshold.setEnabled(false);
+                    threshold_up.setVisible(false);
+                    threshold_up.setEnabled(false);
+                    threshold_down.setVisible(false);
+                    threshold_down.setEnabled(false);
                     settings_open = false;
                 }
             }
@@ -179,7 +187,7 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         run.setBounds(527,400,211, 80); //TODO: set the bounds
         run.setFocusable(false);
         run.setBackground(BACKGROUND_COLOR);
-        run.setFont(new Font("Barlow Condensed Light", Font.PLAIN, 60));
+        run.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 40));
         run.setForeground(Color.WHITE);
         run.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
 
@@ -187,12 +195,12 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         stop.setBounds(527,400,211, 80); //TODO: set the bounds
         stop.setFocusable(false);
         stop.setBackground(PINKY_RED_SALMON);
-        stop.setFont(new Font("Barlow Condensed Light", Font.PLAIN, 60));
+        stop.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 40));
         stop.setForeground(Color.BLACK);
         stop.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 
         detecting_audio.setText("Detecting Audio...");
-        detecting_audio.setFont(new Font("Barlow Condensed Light", Font.PLAIN, 40));
+        detecting_audio.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 20));
         detecting_audio.setBackground(BACKGROUND_COLOR);
         detecting_audio.setForeground(Color.WHITE);
         detecting_audio.setBounds(510,340,240, 55); //TODO: set the bounds
@@ -223,7 +231,7 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
 
         //dBInText
         noise_threshold.setText("53");
-        noise_threshold.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 15));
+        noise_threshold.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 25));
         noise_threshold.setBackground(BACKGROUND_COLOR);
         noise_threshold.setForeground(Color.WHITE);
         noise_threshold.setBounds(1000, 600, 60, 60); //TODO: set the bounds
@@ -252,6 +260,24 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         settings.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 20));
         settings.setForeground(Color.WHITE);
         settings.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
+
+        //threshold up button
+        threshold_up.setText("Increase Limit");
+        threshold_up.setBounds(1000,550,100, 40); //TODO: set the bounds
+        threshold_up.setFocusable(false);
+        threshold_up.setBackground(BACKGROUND_COLOR);
+        threshold_up.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 15));
+        threshold_up.setForeground(Color.WHITE);
+        threshold_up.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
+
+        //threshold down button
+        threshold_down.setText("Decrease Limit");
+        threshold_down.setBounds(1000,500,100, 40); //TODO: set the bounds
+        threshold_down.setFocusable(false);
+        threshold_down.setBackground(BACKGROUND_COLOR);
+        threshold_down.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 15));
+        threshold_down.setForeground(Color.WHITE);
+        threshold_down.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
     }
 
     private void initialize_frame(){
@@ -262,8 +288,6 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
                 frame.setExtendedState(JFrame.ICONIFIED);
             }
         });
-        ImageIcon logo = new ImageIcon("src/java/images/icon3.png");
-        frame.setIconImage(logo.getImage());
         frame.getContentPane().setBackground(BACKGROUND_COLOR);
         frame.setSize(1280, 720);
         frame.setResizable(false);
@@ -271,10 +295,10 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
 
     private void add_to_frame(){
         // ADD FRAMES HERE
-        frame.add(detecting_audio);
         frame.add(run);
         frame.add(stop);
         frame.add(scheduled);
+        frame.add(detecting_audio);
         detecting_audio.setVisible(false);
         detecting_audio.setEnabled(false);
         frame.add(settings);
@@ -286,6 +310,12 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         frame.add(noise_threshold);
         noise_threshold.setVisible(false);
         noise_threshold.setEnabled(false);
+        frame.add(threshold_up);
+        threshold_up.setVisible(false);
+        threshold_up.setEnabled(false);
+        frame.add(threshold_down);
+        threshold_down.setVisible(false);
+        threshold_down.setEnabled(false);
 
         ImageIcon img = new ImageIcon("src/java/images/Owl.png");
         owlImage = new JLabel(img);
