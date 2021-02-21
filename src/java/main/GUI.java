@@ -257,7 +257,7 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         noise_level.setVisible(false);
         noise_level.setEnabled(false);
 
-        ImageIcon img = new ImageIcon("C:\\Users\\Chris\\IdeaProjects\\BC-Hacks-2.0\\src\\java\\images\\Owl.png");
+        ImageIcon img = new ImageIcon("src/java/images/Owl.png");
         owlImage = new JLabel(img);
         owlImage.setBounds(747, 115, 121, 194);
         frame.add(owlImage);
