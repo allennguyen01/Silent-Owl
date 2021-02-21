@@ -1,16 +1,11 @@
 package main;
 
-import java.applet.Applet;
+import com.sun.jdi.IntegerValue;
+
 import java.awt.event.*;
-import javax.imageio.ImageIO;
 import javax.sound.sampled.*;
 import javax.swing.*;
-import javax.swing.event.*;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.io.File;
 
 public class GUI extends JFrame { //implements ActionListener, ChangeListener {
@@ -28,10 +23,13 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
 
     // Settings
     JTextPane settingsTitle = new JTextPane();
-    JTextPane dBInText = new JTextPane();
+    JTextPane noise_threshold = new JTextPane();
+    JButton threshold_up = new JButton();
+    JButton threshold_down = new JButton();
     JTextPane inputDevice = new JTextPane();
     JTextPane scheduled = new JTextPane();
     JTextField dBInput = new JTextField();
+    private boolean settings_open = false;
     //input device menu
     //scheduled
 
@@ -51,20 +49,6 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         initialize_run_stop();
         initialize_settings();
 
-        dBInText.addFocusListener(new FocusListener() {
-            @Override
-            public void focusLost(FocusEvent e) {
-                dBInText.setEditable(true);
-                dBInText.getCaret().setVisible(false);
-            }
-
-            @Override
-            public void focusGained(FocusEvent e) {
-                dBInText.setEditable(false);
-                dBInText.getCaret().setVisible(false);
-            }
-        });
-
         stoppedGUI();
         add_to_frame();
     }
@@ -82,7 +66,7 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
                     System.out.println("RMS Level: " + soundDetect.rms(bytes));
                     String noise = String.valueOf(soundDetect.rms(bytes));
                     noise_level.setText(noise);
-                    if(soundDetect.rms(bytes) > 53){
+                    if(soundDetect.rms(bytes) > Integer.parseInt(noise_threshold.getText())){
                         try
                         {
                             Clip clip = AudioSystem.getClip();
@@ -129,6 +113,12 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
     // Program is stopped
     private void stoppedGUI() {
         is_running = false;
+
+        if(settings_open){
+            close_settings();
+        } else {
+            open_settings();
+        }
         run.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -148,6 +138,33 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
             }
         });
     }
+
+    private void open_settings(){
+        settings.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (settings.isEnabled()) {
+                    noise_threshold.setVisible(true);
+                    noise_threshold.setEnabled(true);
+                    settings_open = true;
+                }
+            }
+        });
+    }
+
+    private void close_settings(){
+        settings.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (settings.isEnabled()) {
+                    noise_threshold.setVisible(false);
+                    noise_threshold.setEnabled(false);
+                    settings_open = false;
+                }
+            }
+        });
+    }
+
 
     private void initialize_run_stop(){
         //Run button
@@ -197,11 +214,11 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         settingsTitle.setBounds(1493, 755, 228, 70); //TODO: set the bounds
 
         //dBInText
-        dBInText.setText("dB Limit");
-        dBInText.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 15));
-        dBInText.setBackground(BACKGROUND_COLOR);
-        dBInText.setForeground(Color.WHITE);
-        dBInText.setBounds(1381, 844, 291, 43); //TODO: set the bounds
+        noise_threshold.setText("53");
+        noise_threshold.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 15));
+        noise_threshold.setBackground(BACKGROUND_COLOR);
+        noise_threshold.setForeground(Color.WHITE);
+        noise_threshold.setBounds(900, 600, 60, 60); //TODO: set the bounds
 
         //inputDevice
         inputDevice.setText("Input Device");
@@ -256,6 +273,9 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         frame.add(noise_level);
         noise_level.setVisible(false);
         noise_level.setEnabled(false);
+        frame.add(noise_threshold);
+        noise_threshold.setVisible(false);
+        noise_threshold.setEnabled(false);
 
         ImageIcon img = new ImageIcon("src/java/images/Owl.png");
         owlImage = new JLabel(img);
