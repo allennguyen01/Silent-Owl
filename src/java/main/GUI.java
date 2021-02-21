@@ -40,6 +40,7 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
     // Screen 2
     JButton stop = new JButton("Stop");
     JTextPane detecting_audio = new JTextPane();
+    JTextPane noise_level = new JTextPane();
 
 
     // Program is not running
@@ -78,7 +79,9 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
                     byte[] bytes = new byte[audioLine.getBufferSize() / 5];
                     audioLine.read(bytes, 0, bytes.length);
                     System.out.println("RMS Level: " + soundDetect.rms(bytes));
-                    if(soundDetect.rms(bytes) > 30){
+                    String noise = String.valueOf(soundDetect.rms(bytes));
+                    noise_level.setText(noise);
+                    if(soundDetect.rms(bytes) > 55){
                         try
                         {
                             Clip clip = AudioSystem.getClip();
@@ -107,6 +110,8 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
                             run.setEnabled(true);
                             detecting_audio.setVisible(false);
                             detecting_audio.setEnabled(false);
+                            noise_level.setVisible(false);
+                            noise_level.setEnabled(false);
                             is_running = false;
                             stoppedGUI();
                         }
@@ -133,6 +138,8 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
                     stop.setEnabled(true);
                     detecting_audio.setVisible(true);
                     detecting_audio.setEnabled(true);
+                    noise_level.setVisible(true);
+                    noise_level.setEnabled(true);
                     is_running = true;
 
                     runningGUI();
@@ -143,7 +150,7 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
 
     private void initialize_run_stop(){
         //Run button
-        run.setBounds(550,330,200, 90); //TODO: set the bounds
+        run.setBounds(540,330,200, 90); //TODO: set the bounds
         run.setFocusable(false);
         run.setBackground(BACKGROUND_COLOR);
         run.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 40));
@@ -151,7 +158,7 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         run.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
 
         //stop button
-        stop.setBounds(550,330,200, 90); //TODO: set the bounds
+        stop.setBounds(540,330,200, 90); //TODO: set the bounds
         stop.setFocusable(false);
         stop.setBackground(PINKY_RED_SALMON);
         stop.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 40));
@@ -162,7 +169,13 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         detecting_audio.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 20));
         detecting_audio.setBackground(BACKGROUND_COLOR);
         detecting_audio.setForeground(Color.WHITE);
-        detecting_audio.setBounds(550,290,180, 70); //TODO: set the bounds
+        detecting_audio.setBounds(540,290,180, 70); //TODO: set the bounds
+
+        noise_level.setText("0");
+        noise_level.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 30));
+        noise_level.setBackground(BACKGROUND_COLOR);
+        noise_level.setForeground(Color.WHITE);
+        noise_level.setBounds(635,500,90, 90); //TODO: set the bounds
     }
 
     private void initialize_title(){
@@ -239,6 +252,9 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         frame.add(settings);
         settings.setVisible(true);
         settings.setEnabled(true);
+        frame.add(noise_level);
+        noise_level.setVisible(false);
+        noise_level.setEnabled(false);
 
         frame.add(title); // Keep this the last thing
         frame.setVisible(true);
