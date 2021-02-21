@@ -1,4 +1,4 @@
-package main;
+package SilentOwl;
 
 import javax.sound.sampled.*;
 

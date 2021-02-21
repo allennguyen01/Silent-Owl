@@ -1,4 +1,4 @@
-package main;
+package SilentOwl;
 
 public class Timer implements Runnable {
     int seconds;
