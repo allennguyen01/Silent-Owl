@@ -255,16 +255,16 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         click_to_start.setFont(new Font("Barlow Condensed Light", Font.PLAIN, 40));
         click_to_start.setBackground(BACKGROUND_COLOR);
         click_to_start.setForeground(Color.WHITE);
-        click_to_start.setBounds(437, 340, 395, 55);
+        click_to_start.setBounds(443, 340, 395, 55);
 
         detecting_audio.setText("Detecting Audio...");
-        detecting_audio.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 20));
+        detecting_audio.setFont(new Font("Barlow Condensed Light", Font.PLAIN, 40));
         detecting_audio.setBackground(BACKGROUND_COLOR);
         detecting_audio.setForeground(Color.WHITE);
         detecting_audio.setBounds(522,340,240, 55); //TODO: set the bounds
 
         noise_level.setText("0");
-        noise_level.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 30));
+        noise_level.setFont(new Font("Barlow Condensed Light", Font.PLAIN, 30));
         noise_level.setBackground(BACKGROUND_COLOR);
         noise_level.setForeground(Color.WHITE);
         noise_level.setBounds(620,570,90, 90); //TODO: set the bounds
