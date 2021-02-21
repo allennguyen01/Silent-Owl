@@ -13,14 +13,10 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
     // Text/Buttons that are always on screen
     JLabel title = new JLabel();
     JLabel owlImage;
-<<<<<<< HEAD
-    JButton settings = new JButton();
     JLabel settingsIcon;
-=======
     JButton settings_on = new JButton();
     JButton settings_off = new JButton();
     JButton graph = new JButton();
->>>>>>> 14d2ae2ebf9b809e3e4dd3524aa68260d5993936
     Color BACKGROUND_COLOR = new Color(0x282828);
     Color PINKY_RED_SALMON = new Color(0xFF7074);
     private boolean is_running;
@@ -328,38 +324,30 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
         //settings_on button
         ImageIcon settings_img = new ImageIcon("java/images/settings" +
             ".png");
-<<<<<<< HEAD
-        settings.setText("");
-        settings.setIcon(settings_img);
-        settings.setBounds(1100, 600, 80, 50); //TODO: set the bounds
-        settings.setFocusable(false);
-//        settings.setBackground(BACKGROUND_COLOR);
-//        settings.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 20));
-//        settings.setForeground(Color.WHITE);
-//        settings.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
-        settings.setOpaque(false);
-        settings.setContentAreaFilled(false);
-        settings.setBorderPainted(false);
-=======
-        settings_on.setText("Settings");
+        settings_on.setText("");
         settings_on.setIcon(settings_img);
-        settings_on.setBounds(1100, 600, 80, 50); //TODO: set the bounds
+        settings_on.setBounds(1150, 600, 52, 52); //TODO: set the bounds
         settings_on.setFocusable(false);
         settings_on.setBackground(BACKGROUND_COLOR);
         settings_on.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 20));
         settings_on.setForeground(Color.WHITE);
         settings_on.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
+        settings_on.setOpaque(false);
+        settings_on.setContentAreaFilled(false);
+        settings_on.setBorderPainted(false);
 
         //settings_off button
-        settings_off.setText("Settings");
+        settings_off.setText("");
         settings_off.setIcon(settings_img);
-        settings_off.setBounds(1100, 600, 80, 50); //TODO: set the bounds
+        settings_off.setBounds(1150, 600, 52, 52); //TODO: set the bounds
         settings_off.setFocusable(false);
         settings_off.setBackground(BACKGROUND_COLOR);
         settings_off.setFont(new Font("Barlow Condensed ExtraLight", Font.PLAIN, 20));
         settings_off.setForeground(Color.WHITE);
         settings_off.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
->>>>>>> 14d2ae2ebf9b809e3e4dd3524aa68260d5993936
+        settings_off.setOpaque(false);
+        settings_off.setContentAreaFilled(false);
+        settings_off.setBorderPainted(false);
 
         //threshold up button
         threshold_up.setText("Increase Limit");
