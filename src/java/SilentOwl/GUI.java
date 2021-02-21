@@ -154,6 +154,10 @@ public class GUI extends JFrame { //implements ActionListener, ChangeListener {
                     settings_off.setVisible(false);
                     settings_off.setEnabled(false);
                     settingsIcon.setVisible(false);
+                    dBUpIcon.setVisible(false);
+                    dBUpIcon.setEnabled(false);
+                    dBDownIcon.setVisible(false);
+                    dBDownIcon.setEnabled(false);
                     noise_threshold.setVisible(false);
                     noise_threshold.setEnabled(false);
                     threshold_up.setVisible(false);
