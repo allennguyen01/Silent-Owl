@@ -14,4 +14,4 @@ Silent Owl uses your computer’s microphone to monitor your volume and provides
 
 <img src="src\java\images\silentowl4.png" align = "center" style="margin: 0 auto;" />
 
-If the noise level goes over the limit, a warning sound is played in your headset device
+If the noise level goes over the limit, a warning sound is played in your headset device.
