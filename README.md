@@ -7,8 +7,8 @@ Introducing Silent Owl!
 
 Silent Owl uses your computer’s microphone to monitor your volume and provides audio feedback to your headphones in the event of a loud noise.
 
-
-
+Devpost link: https://devpost.com/software/silent-owl
+YouTube demo link: https://www.youtube.com/watch?v=2P7GR6VC-Ho
 
 <img src="src\java\images\silentowl1.png" align = "center" style="margin: 0 auto;" />
 
